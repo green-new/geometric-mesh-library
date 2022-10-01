@@ -1,5 +1,7 @@
-#include <stdio.h>
+#define GEOMETRIC_MESH_LIBRARY_IMPLEMENTATION_H
 #include "mesh-library.h"
+
+#include <stdio.h>
 
 int main() {
 	gml_vec3f a = { 1, 1, 1 };
@@ -35,7 +37,7 @@ int main() {
 	gml_vec3f v11 = { b0, -a0, 0 };
 	gml_vec3f v12 = {-b0, -a0, 0};
 
-	gml_create_mesh(&icosahedron, 20);
+	gml_create_mesh(&icosahedron, 12);
 	gml_add_triangle(&icosahedron, &v3, &v2, &v1);
 	gml_add_triangle(&icosahedron, &v2, &v3, &v4);
 	gml_add_triangle(&icosahedron, &v6, &v5, &v4);
@@ -70,7 +72,7 @@ int main() {
 	gml_vec3f c7 = { 1, -1, 1};
 
 	gml_mesh cube;
-	gml_create_mesh(&cube, 12);
+	gml_create_mesh(&cube, 8);
 	gml_add_quad(&cube, &c0, &c1, &c3, &c2);
 	gml_add_quad(&cube, &c4, &c5, &c6, &c7);
 	gml_add_quad(&cube, &c1, &c3, &c6, &c7);
@@ -88,7 +90,7 @@ int main() {
 	gml_vec3f o4 = { 0, 0, 1 };
 	gml_vec3f o5 = { 0, 0, -1 };
 	gml_mesh octahedron;
-	gml_create_mesh(&octahedron, 8);
+	gml_create_mesh(&octahedron, 6);
 	gml_add_triangle(&octahedron, &o0, &o2, &o4);
 	gml_add_triangle(&octahedron, &o1, &o2, &o4);
 	gml_add_triangle(&octahedron, &o1, &o2, &o5);
