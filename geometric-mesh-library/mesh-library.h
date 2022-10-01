@@ -1,4 +1,6 @@
-#pragma once
+#ifndef GEOMETRIC_MESH_LIBRARY
+#define GEOMETRIC_MESH_LIBRARY
+
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -171,3 +173,5 @@ void gml_print_mesh(const gml_mesh* m) {
 	}
 	printf("\n");
 }
+
+#endif
