@@ -5,21 +5,31 @@
 #include <stdlib.h>
 
 typedef struct {
-	float x;
-	float y;
-	float z;
+	float x, y, z;
 } gml_vec3f;
 
 typedef struct {
+	gml_vec3f pos;
+	unsigned int index;
+} gml_vertex;
+
+typedef struct {
+	gml_vec3f p0, p1, p2;
+} gml_triangle;
+
+typedef struct {
 	gml_vec3f*		m_vertices;
-	gml_vec3f*		m_normals;
 	unsigned int*	m_indices;
 	unsigned int    used_vertices;
-	unsigned int	used_normals;
 	unsigned int    used_indices;
 	unsigned int    n_vertices;
 	unsigned int    n_indices;
 } gml_mesh;
+
+typedef struct {
+	gml_vec3f* first;
+	gml_vec3f* second;
+} gml_edge;
 
 /* Subtracts two vectors and returns by value a new gml_vec3f. */
 gml_vec3f gml_subtract(const gml_vec3f* left, const gml_vec3f* right);
@@ -140,7 +150,7 @@ unsigned int gml_get_idx(const gml_mesh* m, const gml_vec3f* v) {
 		return largest + 1;
 	}
 	else {
-		return 0;
+		return 0; 
 	}
 }
 
@@ -171,7 +181,11 @@ void gml_add_face(gml_mesh* m, gml_vec3f vs[], unsigned int n_vs) {
 		if (gml_contains(m, &vs[n]) == -1) {
 			m->m_vertices[m->used_vertices++] = vs[n];
 		}
-		m->m_indices[m->used_indices++] = (unsigned int)gml_get_idx(m, &vs[n]);
+	}
+	for (unsigned int k = 0; k < n_vs - 2; k++) {
+		m->m_indices[m->used_indices++] = (unsigned int)gml_get_idx(m, &vs[k]);
+		m->m_indices[m->used_indices++] = (unsigned int)gml_get_idx(m, &vs[k + 1]);
+		m->m_indices[m->used_indices++] = (unsigned int)gml_get_idx(m, &vs[k + 2]);
 	}
 }
 
