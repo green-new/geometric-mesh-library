@@ -1,5 +1,5 @@
 #define GEOMETRIC_MESH_LIBRARY_IMPLEMENTATION_H
-#include "mesh-library.h"
+#include "mesh_library.h"
 
 #include <stdio.h>
 
