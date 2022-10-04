@@ -127,7 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="mesh-library.h" />
+    <ClInclude Include="mesh_library.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.c" />

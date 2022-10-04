@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="mesh-library.h">
+    <ClInclude Include="mesh_library.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,35 +1,54 @@
+/*
+* Author: Tristen Woodruff
+* Version: 1.0
+* Date: October 3rd, 2022
+* 
+* This library uses planar straight-line graphs to design polygons which make up three dimensional meshes.
+* This introduces triangulation techniques to break faces down into triangles for computer graphics rendering.
+* 
+* 
+* 
+*/
+
 #ifndef GEOMETRIC_MESH_LIBRARY
 #define GEOMETRIC_MESH_LIBRARY
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 
+/* This library can only handle dodecahedron polygons as faces. */
+#define GML_MAX_SIDES	12U
+
+/* Maximum of faces for a three-dimensional mesh. */
+#define GML_MAX_FACES	128U
+
+// V + E - F = 2
+
 typedef struct {
-	float x, y, z;
+	float			x, y, z;
 } gml_vec3f;
 
 typedef struct {
-	gml_vec3f pos;
-	unsigned int index;
+	float			u, v;
+} gml_vec2f;
+
+typedef struct {
+	gml_vec3f		pos;
+	gml_vec3f		normal;
+	gml_vec2f		texture;
 } gml_vertex;
 
 typedef struct {
-	gml_vec3f p0, p1, p2;
-} gml_triangle;
+	gml_vertex*		origin;
+	gml_halfedge*	twin;
+	gml_face*		incident;
+	gml_halfedge*	next;
+	gml_halfedge*	prev;
+} gml_halfedge;
 
 typedef struct {
-	gml_vec3f*		m_vertices;
-	unsigned int*	m_indices;
-	unsigned int    used_vertices;
-	unsigned int    used_indices;
-	unsigned int    n_vertices;
-	unsigned int    n_indices;
-} gml_mesh;
 
-typedef struct {
-	gml_vec3f* first;
-	gml_vec3f* second;
-} gml_edge;
+} gml_face;
 
 /* Subtracts two vectors and returns by value a new gml_vec3f. */
 gml_vec3f gml_subtract(const gml_vec3f* left, const gml_vec3f* right);
@@ -61,7 +80,7 @@ void gml_add_face(gml_mesh* m, gml_vec3f* vs, unsigned int n_vs);
 /* Adds a triangle to the mesh given 3 vectors. */
 void gml_add_triangle(gml_mesh* m, gml_vec3f* x, gml_vec3f* y, gml_vec3f* z);
 
-/* Adds a quad to the mesh given 4 vectors. It creates two triangles with identical normals with the 4 vectors. */
+/* Adds a quad to the mesh given 4 vectors. */
 void gml_add_quad(gml_mesh* m, gml_vec3f* x, gml_vec3f* y, gml_vec3f* z, gml_vec3f* w);
 
 /* Prints the elements of the mesh using printf. */
